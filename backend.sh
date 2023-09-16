@@ -4,7 +4,7 @@ cp backend.service /etc/systemd/system/backend.service
 useradd expense
 mkdir /app
 curl -o /tmp/backend.zip https://expense-artifacts.s3.amazonaws.com/backend.zip
-cd /app
+
 unzip /tmp/backend.zip
 
 npm install
@@ -15,4 +15,4 @@ systemctl enable backend
 systemctl start backend
 
 dnf install mysql -y
-mysql -h 52.87.172.114 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h 54.90.242.96 -uroot -pExpenseApp@1 < /app/schema/backend.sql
