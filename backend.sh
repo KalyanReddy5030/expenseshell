@@ -2,19 +2,19 @@ source common.sh
 component=backend
 
 echo install nodejs repos
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &&>>$log_file
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$log_file
 
 echo install nodejs
-dnf install nodejs -y &&>>$log_file
+dnf install nodejs -y &>>$log_file
 
 echo copy backend service file
-cp backend.service /etc/systemd/system/backend.service &&>>$log_file
+cp backend.service /etc/systemd/system/backend.service &>>$log_file
 
 echo Add Application user
 useradd expense
 
 echo removing app content
-rm -rf /app &&>>$log_file
+rm -rf /app &>>$log_file
 
 mkdir /app
 cd /app
@@ -41,4 +41,4 @@ mysql -h mysql.kalyanreddy5030.online -uroot -pExpenseApp@1 < /app/schema/backen
 #since in terminal we are getting o/p data so it like error for OS
 
 # check D75-2023-09-08-SESSION-16 to know the difference in notion
-#so in all service files we are replacing &>>$log_file to &&>>$log_file
+#so in all service files we are replacing >>$log_file to &>>$log_file
