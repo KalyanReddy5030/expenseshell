@@ -23,5 +23,7 @@ stat_check
 
 echo setup root password
 mysql_root_password=$1
-mysql_secure_installation --set-root-pass $mysql_root_password &>>$log_file  #ExpenseApp@1 this was pwd ususally we don't use in real time like this for my reference i have commented
+mysql_secure_installation --set-root-pass $mysql_root_password &>>$log_file
 stat_check
+
+#ExpenseApp@1 this was pwd usually we don't use in real time like this for my reference i have commented

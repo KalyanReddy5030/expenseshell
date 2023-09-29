@@ -19,6 +19,7 @@ unzip /tmp/$component.zip >>$log_file
 stat_check
 }
 
+# This below code was replaced instead of echo $? -it prints only 0 or 1 by below code will execute accordingly
 stat_check(){
   if [ $? -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
