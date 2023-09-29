@@ -4,25 +4,25 @@ echo installing nginx
 dnf install nginx -y &>>$log_file
 
 if [ $? -eq 0 ]; then
-  echo SUCCESS
+  echo -e "\e[32mSUCCESS\e[0m"
   else
-  echo FAILED
+  echo -e "\e[31mFAILED\e[0m"
 fi
 
 echo placing expense conf file in nginx
 cp expense.conf /etc/nginx/default.d/expense.conf &>>$log_file
 if [ $? -eq 0 ]; then
-  echo SUCCESS
+  echo -e "\e[32mSUCCESS\e[0m"
   else
-  echo FAILED
+  echo -e "\e[31mFAILED\e[0m"
 fi
 
 echo Removing old content
 rm -rf /usr/share/nginx/html/*
 if [ $? -eq 0 ]; then
-  echo SUCCESS
+  echo -e "\e[32mSUCCESS\e[0m"
   else
-  echo FAILED
+  echo -e "\e[31mFAILED\e[0m"
 fi
 
 cd /usr/share/nginx/html
@@ -33,7 +33,7 @@ echo starting nginx service
 systemctl enable nginx &>>$log_file
 systemctl restart nginx &>>$log_file
 if [ $? -eq 0 ]; then
-  echo SUCCESS
+  echo -e "\e[32mSUCCESS\e[0m"
   else
-  echo FAILED
+  echo -e "\e[31mFAILED\e[0m"
 fi
