@@ -2,34 +2,43 @@ source common.sh
 component=backend
 
 echo install nodejs repos
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash >>$log_file
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &&>>$log_file
 
 echo install nodejs
-dnf install nodejs -y >>$log_file
+dnf install nodejs -y &&>>$log_file
 
 echo copy backend service file
-cp backend.service /etc/systemd/system/backend.service >>$log_file
+cp backend.service /etc/systemd/system/backend.service &&>>$log_file
 
 echo Add Application user
 useradd expense
 
 echo removing app content
-rm -rf /app >>$log_file
+rm -rf /app &&>>$log_file
 
 mkdir /app
 cd /app
 download_and_extract
 
 echo Download dependencies
-npm install >>$log_file
+npm install &>>$log_file
 echo start backend service
-systemctl daemon-reload >>$log_file
+systemctl daemon-reload &>>$log_file
 
-systemctl enable backend >>$log_file
-systemctl start backend >>$log_file
+systemctl enable backend &>>$log_file
+systemctl start backend &>>$log_file
 
 echo install mysql client
-dnf install mysql -y >>$log_file
+dnf install mysql -y &>>$log_file
 
 echo Load Schema
-mysql -h mysql.kalyanreddy5030.online -uroot -pExpenseApp@1 < /app/schema/backend.sql >>$log_file
+mysql -h mysql.kalyanreddy5030.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$log_file
+
+#At 8 and 24 line even we are saying to send the all code to log_file=/tmp/expense.log by
+# this it won't be displaying o/p in terminal but still it is displaying to avoid this will learn
+# Outpu redirector (>,1>,2> , &>)
+#>,1> - o/p , 2> -error (not an like error since eventhough we shifted our o/p to different file
+#since in terminal we are getting o/p data so it like error for OS
+
+# check D75-2023-09-08-SESSION-16 to know the difference in notion
+#so in all service files we are replacing &>>$log_file to &&>>$log_file
