@@ -14,6 +14,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
   else
   echo -e "\e[31mFAILED\e[0m"
+  exit 1
 fi
 
 echo install mysql server
@@ -22,6 +23,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
   else
   echo -e "\e[31mFAILED\e[0m"
+  exit 1
 fi
 
 echo start mysql service
@@ -31,6 +33,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
   else
   echo -e "\e[31mFAILED\e[0m"
+  exit 1
 fi
 
 echo setup root password
@@ -39,4 +42,5 @@ if [ $? -eq 0 ]; then
   echo -e "\e[32mSUCCESS\e[0m"
   else
   echo -e "\e[31mFAILED\e[0m"
+  exit 1
 fi
