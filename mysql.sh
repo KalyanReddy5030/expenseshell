@@ -22,7 +22,7 @@ systemctl start mysqld &>>$log_file
 stat_check
 
 echo Setup root Password
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$log_file
+mysql_secure_installation --set-root-pass $1 &>>$log_file
 stat_check
 
 #ExpenseApp@1 this was pwd usually we don't use in real time like this for my reference i have commented
