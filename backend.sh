@@ -44,9 +44,11 @@ dnf install mysql -y &>>$log_file
 stat_check
 
 echo Load Schema
-mysql_root_password=$1  # $1 states by this we can send argument(in below line we can also give directly as $1)
+mysql_root_password=$1
 mysql -h mysql.kalyanreddy5030.online -uroot -p$mysql_root_password < /app/schema/backend.sql &>>$log_file
 stat_check
+
+# $1 states by this we can send argument(in below line we can also give directly as $1)
 #At installing nodejs and npm install line even we are saying to send the all code to
 # log_file=/tmp/expense.log by
 # this it won't be displaying o/p in terminal but still it is displaying to avoid this will learn
