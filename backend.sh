@@ -44,7 +44,8 @@ dnf install mysql -y &>>$log_file
 stat_check
 
 echo Load Schema
-mysql -h mysql.kalyanreddy5030.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$log_file
+mysql_root_password=$1  # $1 states by this we can send argument
+mysql -h mysql.kalyanreddy5030.online -uroot -p$mysql_root_password < /app/schema/backend.sql &>>$log_file
 stat_check
 #At installing nodejs and npm install line even we are saying to send the all code to
 # log_file=/tmp/expense.log by
