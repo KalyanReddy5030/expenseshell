@@ -3,48 +3,23 @@ component=backend #local variable backend
 
 echo install nodejs repos
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 
 echo install nodejs
 dnf install nodejs -y &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 
 echo copy backend service file
 cp backend.service /etc/systemd/system/backend.service &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 
 echo Add Application user
 useradd expense
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 
 echo removing app content
 rm -rf /app &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 
 mkdir /app
 cd /app
@@ -52,41 +27,21 @@ download_and_extract
 
 echo Download dependencies
 npm install &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 
 echo start backend service
 systemctl daemon-reload &>>$log_file
 systemctl enable backend &>>$log_file
 systemctl start backend &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 
 echo install mysql client
 dnf install mysql -y &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 
 echo Load Schema
 mysql -h mysql.kalyanreddy5030.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+stat_check
 #At installing nodejs and npm install line even we are saying to send the all code to
 # log_file=/tmp/expense.log by
 # this it won't be displaying o/p in terminal but still it is displaying to avoid this will learn

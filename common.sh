@@ -11,20 +11,19 @@ download_and_extract(){
   #frontend.sh as component=frontend and to execute we give as $component
 echo downloading $component code
 curl -s -o /tmp/$component.zip https://expense-artifacts.s3.amazonaws.com/$component.zip >>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+echo $?
 
 echo extracting $component code
 unzip /tmp/$component.zip >>$log_file
 
-if [ $? -eq 0 ]; then
-  echo -e "\e[32mSUCCESS\e[0m"
-  else
-  echo -e "\e[31mFAILED\e[0m"
-  exit 1
-fi
+echo $?
+}
+
+stat_check(){
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+    else
+    echo -e "\e[31mFAILED\e[0m"
+    exit 1
+  fi
 }
